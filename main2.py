@@ -3,6 +3,8 @@ import math
 
 app = Ursina()
 
+mirror_shader = Shader.load(Shader.GLSL, vertex='mirror_shader.glsl', fragment='mirror_shader.glsl')
+
 camera.position = Vec3(-5, 4, 10)
 camera.look_at(Vec3(1.25, 1, 0))
 camera.shadows = True
@@ -36,10 +38,11 @@ back_wall = Entity(
 
 ellips = Entity(
     model='sphere',
-    texture='brick',
+    texture='metal',  # Текстура для отражения
     scale=(2, 1, 1),
     position=(0, 1, 0),
-    cast_shadows=True
+    cast_shadows=True,
+    shader=mirror_shader  # Применяем шейдер
 )
 
 light = DirectionalLight()
